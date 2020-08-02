@@ -28430,7 +28430,7 @@ void Game::DrawTitleScreen( int x,int y )
 
 void Game::ComposeFrame()
 {
-	gfx.DrawCircleFill( 200, 200, 100, Colors::Blue );
+	gfx.DrawAnnulus( 200, 200, 120, 100, Colors::Blue );
 	if( !isStarted )
 	{
 		DrawTitleScreen( 325,211 );

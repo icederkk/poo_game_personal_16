@@ -338,30 +338,30 @@ void Graphics::DrawRect( int x0,int y0,int x1,int y1,Color c )
 
 void Graphics::DrawCircleFill(int x, int y, int radius, Color c)
 {
-	for (int i = (x - radius); i < (x + radius); i++)
+	for (int i = (x - radius); i < (x + radius + 1); i++)
 	{
-		for (int j = (y - radius); j < (y + radius); j++)
+		for (int j = (y - radius); j < (y + radius + 1); j++)
 		{
-			int x_dist;
-			int y_dist;
-			if (x < i)
+			const int x_dist = x - i;
+			const int y_dist = y - j;
+			if ( (x_dist*x_dist + y_dist*y_dist) <= (radius*radius) )
 			{
-				x_dist = i - x;
+				PutPixel(i, j, c);
 			}
-			else
-			{
-				x_dist = x - i;
-			}
-			if (y < j)
-			{
-				y_dist = j - y;
-			}
-			else
-			{
-				y_dist = y - j;
-			}
-			const int dist = int( sqrt(pow(x_dist, 2) + pow(y_dist, 2)) );
-			if (dist < radius)
+		}
+	}
+}
+
+void Graphics::DrawAnnulus(int x, int y, int outer_radius, int inner_radius, Color c)
+{
+	assert(outer_radius > inner_radius);
+	for (int i = (x - outer_radius); i < (x + outer_radius + 1); i++)
+	{
+		for (int j = (y - outer_radius); j < (y + outer_radius + 1); j++)
+		{
+			const int x_dist = x - i;
+			const int y_dist = y - j;
+			if ( ((x_dist * x_dist + y_dist * y_dist) <= (outer_radius * outer_radius)) && ((x_dist * x_dist + y_dist * y_dist) >= (inner_radius * inner_radius)) )
 			{
 				PutPixel(i, j, c);
 			}
