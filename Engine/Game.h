@@ -28,6 +28,7 @@
 #include "Goal.h"
 #include "Meter.h"
 #include "SoundEffect.h"
+#include "FrameTimer.h"
 #include <random>
 
 class Game
@@ -54,6 +55,7 @@ private:
 	std::mt19937 rng;
 	std::uniform_real_distribution<float> xDist;
 	std::uniform_real_distribution<float> yDist;
+	FrameTimer ft;
 	Dude dude;
 	Goal goal;
 	Meter meter;
@@ -63,7 +65,6 @@ private:
 	bool isGameOver = false;
 	SoundEffect pickup = SoundEffect( { L"Sounds\\coin.wav" } );
 	Sound title = Sound( L"Sounds\\title.wav" );
-	SoundEffect fart = SoundEffect( 
-		{ L"Sounds\\fart1.wav",L"Sounds\\fart2.wav" } );
+	SoundEffect fart = SoundEffect( { L"Sounds\\fart1.wav",L"Sounds\\fart2.wav" } );
 	/********************************/
 };
